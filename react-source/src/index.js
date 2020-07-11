@@ -1,17 +1,58 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+// import React, {Component} from "react";
+// import ReactDOM from "react-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+import React from "./jreact/";
+import ReactDOM from "./jreact/react-dom";
+import Component from "./jreact/Component";
+import "./index.css";
+
+function FunctionComponent(props) {
+  return (
+    <div className="border">
+      FunctionComponent-{props.name}
+      <button
+        onClick={() => {
+          console.log("omg"); //sy-log
+        }}>
+        click
+      </button>
+    </div>
+  );
+}
+
+class ClassComponent extends Component {
+  static defaultProps = {
+    color: "green"
+  };
+  render() {
+    return (
+      <div className="border">
+        ClassComponent-{this.props.name}
+        <p className={this.props.color}>color</p>
+      </div>
+    );
+  }
+}
+
+const jsx = (
+  <div className="border">
+    <p>React</p>
+    <a href="https://github.com/JingSongZhang">JingSongZhang</a>
+    <FunctionComponent name="function" />
+    <ClassComponent name="class" />
+
+    {/* {[1, 2].map(item => (
+      <React.Fragment key={item}>{item}</React.Fragment>
+    ))} */}
+
+    <>
+      <h1>1</h1>
+      <h2>2</h2>
+    </>
+  </div>
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(jsx, document.getElementById("root"));
+
+//多个节点
+// fragment
